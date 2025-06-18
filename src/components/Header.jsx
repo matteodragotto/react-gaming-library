@@ -1,7 +1,11 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
   return (
     <header className="bg-gray-800 text-white p-4">
-      <h1 className="text-2xl">My Application</h1>
+      <Link to="/" className="text-white no-underline hover:text-blue-500">
+        <h1 className="text-2xl font-bold">Game Library</h1>
+      </Link>
     </header>
   );
 }

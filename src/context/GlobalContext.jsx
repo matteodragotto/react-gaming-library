@@ -8,20 +8,57 @@ const GlobalProvider = ({ children }) => {
   const api_url = "http://127.0.0.1:8000/api/games/";
 
   const [games, setGames] = useState([]);
+  const [game, setGame] = useState(null);
+  const [page, setPage] = useState(1);
+  const [hasNextPage, setHasNextPage] = useState(false);
+  const [hasPrevPage, setHasPrevPage] = useState(false);
 
-  const fetchGames = () => {
-    axios.get(api_url)
+  const fetchGames = (pageNumber = 1) => {
+    axios.get(`${api_url}?page=${pageNumber}`)
       .then(response => {
-        setGames(response.data);
+        setGames(response.data.data.data);
+        setPage(response.data.data.current_page);
+        setHasNextPage(response.data.data.next_page_url !== null);
+        setHasPrevPage(response.data.data.prev_page_url !== null);
       })
       .catch(error => {
         console.error("Error fetching games:", error);
+      });
+  };
+
+  const nextPage = () => {
+    if (hasNextPage) {
+      fetchGames(page + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (hasPrevPage && page > 1) {
+      fetchGames(page - 1);
+    }
+  };
+
+  const fetchGameById = (id) => {
+    return axios.get(`${api_url}${id}/`)
+      .then(response => {
+        setGame(response.data.data);
+      })
+      .catch(error => {
+        console.error("Error fetching game by ID:", error);
+        throw error;
       });
   }
 
   const value = {
     fetchGames,
     games,
+    nextPage,
+    prevPage,
+    page,
+    hasNextPage,
+    hasPrevPage,
+    fetchGameById,
+    game,
   }
 
   return (
