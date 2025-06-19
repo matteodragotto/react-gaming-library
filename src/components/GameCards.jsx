@@ -9,13 +9,15 @@ const GameCards = ({ game }) => {
       <div className="max-w-sm rounded overflow-hidden shadow-lg">
         <img className="w-full h-48 object-cover" src={`${image_url}${game.cover_image}`} alt={game.title} />
         <div className="px-6 py-4">
-          <div className="font-bold text-xl mb-2">{game.title}</div>
-          <p className="text-gray-700 text-base">{game.description}</p>
+          <div className="font-bold text-xl mb-2 text-white">{game.title}</div>
+          <p className="text-gray-700 text-base text-white"><strong>Developer:</strong> {game.developer}</p>
         </div>
         <div className="px-6 pt-4 pb-2">
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-            {game.genre}
-          </span>
+          {game.genres && game.genres.map((genre) => (
+            <span key={genre.id} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+              {genre.name}
+            </span>
+          ))}
         </div>
       </div>
     </Link>
