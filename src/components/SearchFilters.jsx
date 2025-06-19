@@ -1,0 +1,93 @@
+import { useState } from "react";
+import { useGlobalContext } from "../context/GlobalContext";
+
+
+
+const SearchFilters = ({ genres, platforms }) => {
+
+  const { searchGames, fetchGames } = useGlobalContext();
+
+  const [areGenresVisible, setAreGenresVisible] = useState(false);
+  const [arePlatformsVisible, setArePlatformsVisible] = useState(false);
+  const [selectedGenre, setSelectedGenre] = useState(null);
+  const [selectedPlatform, setSelectedPlatform] = useState(null);
+
+  const showGenres = () => {
+    setAreGenresVisible(!areGenresVisible);
+  }
+
+  const showPlatforms = () => {
+    setArePlatformsVisible(!arePlatformsVisible);
+  }
+
+  const handleGenreClick = (genreId) => {
+    setSelectedGenre(genreId);
+    searchGames(`genre_id=${genreId}`);
+  };
+
+  const handlePlatformClick = (platformId) => {
+    setSelectedPlatform(platformId);
+    searchGames(`platform_id=${platformId}`);
+  };
+
+  const handleResetClick = () => {
+    setSelectedGenre(null);
+    setSelectedPlatform(null);
+    setAreGenresVisible(false);
+    setArePlatformsVisible(false);
+    fetchGames(1); // Reset to the first page of games
+  };
+
+  return (
+    <div className="flex flex-col items-center">
+      <div className="flex flex-wrap justify-center gap-4 my-5">
+        <button onClick={() => showGenres()} className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors flex justify-center items-center gap-2">
+          Generi
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4">
+            <path fillRule="evenodd" d="M11.47 4.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1-1.06 1.06L12 6.31 8.78 9.53a.75.75 0 0 1-1.06-1.06l3.75-3.75Zm-3.75 9.75a.75.75 0 0 1 1.06 0L12 17.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-3.75 3.75a.75.75 0 0 1-1.06 0l-3.75-3.75a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+          </svg>
+        </button>
+
+        <button onClick={() => showPlatforms()} className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors flex justify-center items-center gap-2">
+          Piattaforme
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4">
+            <path fillRule="evenodd" d="M11.47 4.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1-1.06 1.06L12 6.31 8.78 9.53a.75.75 0 0 1-1.06-1.06l3.75-3.75Zm-3.75 9.75a.75.75 0 0 1 1.06 0L12 17.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-3.75 3.75a.75.75 0 0 1-1.06 0l-3.75-3.75a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+          </svg>
+        </button>
+
+        <button
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 transition-colors"
+          onClick={() => handleResetClick()}
+        >
+          Mostra Tutti
+        </button>
+      </div>
+
+
+      <div className="flex flex-wrap justify-center gap-4 my-5">
+        {areGenresVisible && genres.map((genre) => (
+          <button
+            key={genre.id}
+            className={`text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors ${selectedGenre === genre.id ? 'bg-blue-600' : 'bg-gray-800'}`}
+            onClick={() => handleGenreClick(genre.id)}
+          >
+            {genre.name}
+          </button>
+        ))}
+        {arePlatformsVisible && platforms.map((platform) => (
+          <button
+            key={platform.id}
+            className={`text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors ${selectedPlatform === platform.id ? 'bg-blue-600' : 'bg-gray-800'}`}
+            onClick={() => handlePlatformClick(platform.id)}
+          >
+            {platform.name}
+          </button>
+        ))}
+      </div>
+
+    </div>
+
+  );
+}
+
+export default SearchFilters;

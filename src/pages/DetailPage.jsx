@@ -28,8 +28,10 @@ const DetailPage = () => {
         />
         <div className="flex flex-col">
           <h1 className="text-2xl font-bold mt-5">{game?.title}</h1>
-          <p className="mt-2">Description: {game?.description}</p>
-          <p className="mt-2">Release Date: {game?.release_date}</p>
+          <p className="mt-2">Sviluppatore: {game?.developer}</p>
+          <p className="mt-2">Publisher: {game?.publisher}</p>
+          <p className="mt-2">Descrizione: {game?.description}</p>
+          <p className="mt-2">Data di rilascio: {game?.release_date}</p>
           <div className="mt-2 flex gap-1"> Generi:
             {game?.genres && game.genres.map((genre) => (
               <span key={genre.id} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
@@ -39,7 +41,10 @@ const DetailPage = () => {
           </div>
           <div className="mt-2 flex gap-1"> Piattaforme:
             {game?.platforms && game.platforms.map((platform) => (
-              <span key={platform.id} className="inline-block rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+              <span key={platform.id}
+                className="inline-block rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"
+                style={{ backgroundColor: platform.color || '#e0e0e0' }}>
+
                 {platform.name}
               </span>
             ))}
