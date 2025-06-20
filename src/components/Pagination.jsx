@@ -7,7 +7,7 @@ const Pagination = ({ games, prevPage, nextPage, hasNextPage, hasPrevPage, page 
           <button
             onClick={() => prevPage()}
             disabled={!hasPrevPage}
-            className={`px-4 py-2 bg-cyan-400 text-white rounded ${!hasPrevPage ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+            className={`px-4 py-2 bg-emerald-400 text-white rounded ${!hasPrevPage ? "opacity-50 cursor-not-allowed" : "cursor-pointer hover:bg-emerald-500"}`}
           >
             Previous
           </button>
@@ -15,7 +15,7 @@ const Pagination = ({ games, prevPage, nextPage, hasNextPage, hasPrevPage, page 
           <button
             onClick={() => nextPage()}
             disabled={!hasNextPage}
-            className={`px-4 py-2 bg-cyan-400 text-white rounded ${!hasNextPage ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+            className={`px-4 py-2 bg-emerald-400 text-white rounded ${!hasNextPage ? "opacity-50 cursor-not-allowed" : "cursor-pointer hover:bg-emerald-500"}`}
           >
             Next
           </button>

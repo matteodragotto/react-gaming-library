@@ -6,7 +6,7 @@ const GameCards = ({ game }) => {
 
   return (
     <Link to={`/games/${game.id}`} className="no-underline text-black hover:text-blue-500">
-      <div className="max-w-sm rounded overflow-hidden shadow-lg">
+      <div className="max-w-sm border border-white rounded overflow-hidden shadow-lg">
         <img className="w-full h-48 object-cover" src={`${image_url}${game.cover_image}`} alt={game.title} />
         <div className="px-6 py-4">
           <div className="font-bold text-xl mb-2 text-white">{game.title}</div>

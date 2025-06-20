@@ -2,4 +2,23 @@
 
 body {
   background-color: black;
+  color: white;
+}
+
+@keyframes pulseEmeraldGlow {
+
+  0%,
+  100% {
+    background-color: #34D399;
+    box-shadow: 0 0 10px #34D39980, 0 0 20px #34D39940;
+  }
+
+  50% {
+    background-color: #047857;
+    box-shadow: 0 0 20px #047857aa, 0 0 40px #04785755;
+  }
+}
+
+.pulse-emerald-glow {
+  animation: pulseEmeraldGlow 2s ease-in-out infinite;
 }

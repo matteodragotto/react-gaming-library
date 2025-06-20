@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useGlobalContext } from "../context/GlobalContext";
 import { useParams } from "react-router-dom";
 import YouTube from "react-youtube";
@@ -10,6 +10,12 @@ const DetailPage = () => {
 
   const { fetchGameById, game, extractYouTubeID } = useGlobalContext();
   const { id } = useParams();
+  const [isTrailerShown, setIsTrailerShown] = useState(false);
+
+  const showTrailer = () => {
+    setIsTrailerShown(!isTrailerShown);
+  }
+
 
   useEffect(() => {
     fetchGameById(id)
@@ -49,11 +55,22 @@ const DetailPage = () => {
               </span>
             ))}
           </div>
+          <div>
+            {game && game.trailer_url && (
+              <div>
+                <button onClick={() => showTrailer()} className="mt-2 bg-emerald-400 text-white px-4 py-2 rounded hover:bg-emerald-500 transition-colors pulse-emerald-glow">
+                  Guarda Trailer
+                </button>
+              </div>
+
+            )}
+          </div>
+
         </div>
 
       </div>
       <div className="flex justify-center items-center my-20 w-full flex-1">
-        {game && game.trailer_url ? (
+        {isTrailerShown ? (
           <YouTube
             videoId={extractYouTubeID(game.trailer_url)}
             opts={{
@@ -66,7 +83,7 @@ const DetailPage = () => {
             className="w-full max-w-3xl mx-auto"
           />
         ) : (
-          <p className="text-center text-lg font-bold text-gray-600">No trailer available</p>
+          null
         )}
       </div>
 

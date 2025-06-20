@@ -36,6 +36,7 @@ const SearchFilters = ({ genres, platforms }) => {
         searchGames(`genre_id=${genreId}`);
       }
     }
+    areGenresVisible && setAreGenresVisible(false);
   };
 
 
@@ -55,6 +56,7 @@ const SearchFilters = ({ genres, platforms }) => {
         searchGames(`platform_id=${platformId}`);
       }
     }
+    arePlatformsVisible && setArePlatformsVisible(false);
   };
 
   const handleResetClick = () => {
@@ -67,58 +69,59 @@ const SearchFilters = ({ genres, platforms }) => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="flex flex-wrap justify-center gap-4 my-5">
-        <button onClick={() => showGenres()} className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors flex justify-center items-center gap-2">
+      <div className="flex flex-wrap justify-center items-center gap-4 my-5">
+        <span>Filtra per:</span>
+        <button onClick={() => showGenres()} className="bg-emerald-600 text-white px-4 py-2 rounded hover:bg-emerald-400 transition-colors flex justify-center items-center gap-2">
           Generi
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4">
             <path fillRule="evenodd" d="M11.47 4.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1-1.06 1.06L12 6.31 8.78 9.53a.75.75 0 0 1-1.06-1.06l3.75-3.75Zm-3.75 9.75a.75.75 0 0 1 1.06 0L12 17.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-3.75 3.75a.75.75 0 0 1-1.06 0l-3.75-3.75a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
           </svg>
         </button>
 
-        <button onClick={() => showPlatforms()} className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors flex justify-center items-center gap-2">
+        <button onClick={() => showPlatforms()} className="bg-emerald-600 text-white px-4 py-2 rounded hover:bg-emerald-400 transition-colors flex justify-center items-center gap-2">
           Piattaforme
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-4">
             <path fillRule="evenodd" d="M11.47 4.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1-1.06 1.06L12 6.31 8.78 9.53a.75.75 0 0 1-1.06-1.06l3.75-3.75Zm-3.75 9.75a.75.75 0 0 1 1.06 0L12 17.69l3.22-3.22a.75.75 0 1 1 1.06 1.06l-3.75 3.75a.75.75 0 0 1-1.06 0l-3.75-3.75a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
           </svg>
         </button>
-
-        <button
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 transition-colors"
+        {(selectedGenre || selectedPlatform ? <button
+          className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500 transition-colors"
           onClick={() => handleResetClick()}
         >
           Rimuovi filtri
-        </button>
+        </button> : null)}
       </div>
 
+      {(areGenresVisible || arePlatformsVisible ?
+        <div className="flex flex-col items-center gap-2 my-5">
+          {(areGenresVisible ?
+            <div className="border rounded-xs flex flex-wrap justify-center items-center gap-2 p-4">
+              {genres.map((genre) => (
+                <button
+                  key={genre.id}
+                  className={`text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors ${selectedGenre === genre.id ? 'bg-emerald-400' : 'bg-gray-800'}`}
+                  onClick={() => handleGenreClick(genre.id)}
+                >
+                  {genre.name}
+                </button>
+              ))}
+            </div> : null)}
 
-      <div className="flex flex-col items-center gap-2 my-5">
-        <div className="border rounded-xs flex flex-wrap justify-center items-center gap-2 p-4">
-          {areGenresVisible && genres.map((genre) => (
-            <button
-              key={genre.id}
-              className={`text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors ${selectedGenre === genre.id ? 'bg-blue-600' : 'bg-gray-800'}`}
-              onClick={() => handleGenreClick(genre.id)}
-            >
-              {genre.name}
-            </button>
-          ))}
+          {(arePlatformsVisible ?
+            <div className="border rounded-xs flex flex-wrap justify-center items-center gap-2 p-4">
+              {arePlatformsVisible && platforms.map((platform) => (
+                <button
+                  key={platform.id}
+                  className={`text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors ${selectedPlatform === platform.id ? 'bg-blue-600' : 'bg-gray-800'}`}
+                  onClick={() => handlePlatformClick(platform.id)}
+                >
+                  {platform.name}
+                </button>
+              ))}
+            </div> : null)}
         </div>
-        <div className="border rounded-xs flex flex-wrap justify-center items-center gap-2 p-4">
-          {arePlatformsVisible && platforms.map((platform) => (
-            <button
-              key={platform.id}
-              className={`text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors ${selectedPlatform === platform.id ? 'bg-blue-600' : 'bg-gray-800'}`}
-              onClick={() => handlePlatformClick(platform.id)}
-            >
-              {platform.name}
-            </button>
-          ))}
-        </div>
-
-      </div>
-
-    </div>
-
+        : null)}
+    </div >
   );
 }
 
