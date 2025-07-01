@@ -44,7 +44,7 @@ const HomePage = () => {
 
       <div className="flex flex-wrap justify-center gap-8 my-2 mx-auto px-4">
         {games.length === 0 && <p className="text-center text-lg font-bold text-gray-600">Nessun gioco trovato.</p>}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-5 justify-items-center">
           {games.map((game) => (
             <div key={game.id} className="flex justify-center w-full">
               <GameCards game={game} />

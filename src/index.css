@@ -1,8 +1,24 @@
 @import "tailwindcss";
 
+
+.dm-sans {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100
+    /* 100-1000 */
+  ;
+  font-style: normal;
+}
+
 body {
   background-color: black;
   color: white;
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300
+    /* 100-1000 */
+  ;
+  font-style: normal;
 }
 
 @keyframes pulseEmeraldGlow {

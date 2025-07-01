@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 const Header = () => {
 
@@ -40,14 +41,17 @@ const Header = () => {
 
   return (
     <header className="bg-black-900 text-white p-4">
-      <Link to="/" className="text-white no-underline hover:text-blue-500">
-        <div className="logo flex items-center">
-          {/* <img src="/logo-emerald.svg" alt="Logo" className="h-12 w-12 inline-block mr-2" /> */}
-          <CrystalIcon className="h-12 w-12 inline-block mr-2" />
-          <h1 className="text-2xl font-bold">Save Point</h1>
+      <div className="flex justify-between items-center">
+        <Link to="/" className="text-white no-underline hover:text-emerald-500">
+          <div className="logo flex items-center">
+            <CrystalIcon className="h-12 w-12 inline-block mr-2" />
+            <h1 className="text-2xl font-bold hidden sm:block">SavePoint</h1>
+          </div>
+        </Link>
+        <SearchBar />
 
-        </div>
-      </Link>
+      </div>
+
       <hr className="mt-2 px-4" />
     </header>
   );

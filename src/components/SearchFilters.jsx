@@ -93,9 +93,9 @@ const SearchFilters = ({ genres, platforms }) => {
       </div>
 
       {(areGenresVisible || arePlatformsVisible ?
-        <div className="flex flex-col items-center gap-2 my-5">
+        <div className="flex flex-col items-center gap-2 my-5 mx-6">
           {(areGenresVisible ?
-            <div className="border rounded-xs flex flex-wrap justify-center items-center gap-2 p-4">
+            <div className="border rounded-lg flex flex-wrap justify-center items-center gap-2 p-4">
               {genres.map((genre) => (
                 <button
                   key={genre.id}
@@ -108,7 +108,7 @@ const SearchFilters = ({ genres, platforms }) => {
             </div> : null)}
 
           {(arePlatformsVisible ?
-            <div className="border rounded-xs flex flex-wrap justify-center items-center gap-2 p-4">
+            <div className="border rounded-lg flex flex-wrap justify-center items-center gap-2 p-4">
               {arePlatformsVisible && platforms.map((platform) => (
                 <button
                   key={platform.id}
