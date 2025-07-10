@@ -112,7 +112,7 @@ const SearchFilters = ({ genres, platforms }) => {
               {arePlatformsVisible && platforms.map((platform) => (
                 <button
                   key={platform.id}
-                  className={`text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors ${selectedPlatform === platform.id ? 'bg-blue-600' : 'bg-gray-800'}`}
+                  className={`text-white px-4 py-2 rounded hover:bg-gray-700 transition-colors ${selectedPlatform === platform.id ? 'bg-emerald-400' : 'bg-gray-800'}`}
                   onClick={() => handlePlatformClick(platform.id)}
                 >
                   {platform.name}

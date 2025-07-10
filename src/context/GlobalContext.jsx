@@ -22,6 +22,7 @@ const GlobalProvider = ({ children }) => {
         setPage(response.data.data.current_page);
         setHasNextPage(response.data.data.next_page_url !== null);
         setHasPrevPage(response.data.data.prev_page_url !== null);
+        setGame(null);
       })
       .catch(error => {
         console.error("Error fetching games:", error);

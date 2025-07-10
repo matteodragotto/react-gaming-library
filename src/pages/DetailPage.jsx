@@ -19,10 +19,9 @@ const DetailPage = () => {
 
   useEffect(() => {
     fetchGameById(id)
-  }, [id, fetchGameById(id)])
+  }, [id])
 
   console.log("Game details:", game);
-
 
   return (
     <div>
